@@ -11,8 +11,7 @@ public class ArchivoLectura {
     private Scanner entrada;
     private String nombreArchivo;
     private String rutaArchivo;
-    private ArrayList<APIMovie> lista;
-    private ArrayList<Auxiliar> listaAux;
+    private ArrayList<GeneradorPelicula> lista;
 
     public ArchivoLectura(String n) {
         nombreArchivo = n;
@@ -56,7 +55,6 @@ public class ArchivoLectura {
     // en la lista de tipo Profesor
     public void establecerLista() {
         lista = new ArrayList<>();
-        listaAux = new ArrayList<>();
         File f = new File(rutaArchivo);
 
         if (f.exists()) {
@@ -72,67 +70,76 @@ public class ArchivoLectura {
             } // fin de while
         }
     }
-    public void establecerProceso (ArrayList<String> linea_partes){
+
+    public void establecerProceso(ArrayList<String> linea_partes) {
         for (int i = 0; i < linea_partes.size(); i++) {
-                    switch (linea_partes.get(i)) {
-                        case "Netflix": {
-                            APINetflix netflix = new APINetflix();
+            switch (linea_partes.get(i)) {
+                case "Netflix": {
+                    APINetflix netflix = new APINetflix();
 
-                            String ak = String.format("%s/user?%s",
-                                    linea_partes.get(2),
-                                    linea_partes.get(1));
-                            netflix.establecerApiKey(ak);
+                    String ak = String.format("%s/user?%s",
+                            linea_partes.get(2),
+                            linea_partes.get(1));
+                    netflix.establecerApiKey(ak);
 
-                            Auxiliar aux = new Auxiliar(linea_partes.get(1));
-                            listaAux.add(aux); // user
-                            lista.add(netflix); // anadir el API
-                            break;
-                        }
-                        case "Amazon": {
-                            APIAmazonMovie amazon = new APIAmazonMovie();
-                            String ak = String.format("%s/user?%s",
-                                    linea_partes.get(2), linea_partes.get(1));
-                            amazon.establecerApiKey(ak);
-                            Auxiliar aux = new Auxiliar(linea_partes.get(1));
-                            listaAux.add(aux); // user
-                            lista.add(amazon);
-
-                            break;
-                        }
-                        case "Disney": {
-                            APIDisney disney = new APIDisney();
-                            String ak = String.format("%s/user?%s",
-                                    linea_partes.get(2),
-                                    linea_partes.get(1));
-                            disney.establecerApiKey(ak);
-                            Auxiliar aux = new Auxiliar(linea_partes.get(1));
-                            listaAux.add(aux); // user
-                            lista.add(disney);
-                            break;
-                        }
-                        case "Startplus": {
-                            APIStartplus starplus = new APIStartplus();
-                            String ak = String.format("%s/user?%s",
-                                    linea_partes.get(2),
-                                    linea_partes.get(1));
-                            starplus.establecerApiKey(ak);
-                            Auxiliar aux = new Auxiliar(linea_partes.get(1));
-                            listaAux.add(aux); // user
-                            lista.add(starplus);
-                            break;
-                        }
-                        default:
-                            break;
-                    }
+                    GeneradorPelicula g1 = new GeneradorPelicula();
+                    g1.establecerLlave(netflix);
+                    g1.establecerUrl("http://api.movie?api=");
+                    g1.establecerUser(linea_partes.get(1));
+                    lista.add(g1); // anadir el gen
+                    break;
                 }
+                case "Amazon": {
+                    APIAmazonMovie amazon = new APIAmazonMovie();
+                    String ak = String.format("%s/user?%s",
+                            linea_partes.get(2), linea_partes.get(1));
+                    amazon.establecerApiKey(ak);
+
+                    GeneradorPelicula g1 = new GeneradorPelicula();
+                    g1.establecerLlave(amazon);
+                    g1.establecerUrl("http://api.movie?api=");
+                    g1.establecerUser(linea_partes.get(1));
+                    lista.add(g1); // anadir el gen
+                    break;
+                }
+                case "Disney": {
+                    APIDisney disney = new APIDisney();
+                    String ak = String.format("%s/user?%s",
+                            linea_partes.get(2),
+                            linea_partes.get(1));
+                    disney.establecerApiKey(ak);
+
+                    GeneradorPelicula g1 = new GeneradorPelicula();
+                    g1.establecerLlave(disney);
+                    g1.establecerUrl("http://api.movie?api=");
+                    g1.establecerUser(linea_partes.get(1));
+                    lista.add(g1); // anadir el gen
+                    break;
+                }
+                case "Startplus": {
+                    APIStartplus starplus = new APIStartplus();
+                    String ak = String.format("%s/user?%s",
+                            linea_partes.get(2),
+                            linea_partes.get(1));
+                    starplus.establecerApiKey(ak);
+                    
+                    GeneradorPelicula g1 = new GeneradorPelicula();                   
+                    g1.establecerLlave(starplus);
+                    g1.establecerUrl("http://api.movie?api=");
+                    g1.establecerUser(linea_partes.get(1));
+                    lista.add(g1); // anadir el gen
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
     }
 
-    public ArrayList<APIMovie> obtenerLista() { // APIMovies
+    
+
+    public ArrayList<GeneradorPelicula> obtenerListaGeneradores() { // usernames
         return lista;
-    }
-
-    public ArrayList<Auxiliar> obtenerListaAuxiliar() { // usernames
-        return listaAux;
     }
 
     public void cerrarArchivo() {

@@ -19,26 +19,16 @@ public class Principal {
         Por cada objeto de tipo GeneradorPelicula presentar la información 
         a través de un toString
          */
-        
         String nombreArchivo = "usuarios.txt";
         ArchivoLectura lectura = new ArchivoLectura(nombreArchivo);
         lectura.establecerLista();
-        ArrayList<APIMovie> lista = lectura.obtenerLista();
-        ArrayList <Auxiliar> listaAux = lectura.obtenerListaAuxiliar();
-        ArrayList<GeneradorPelicula> gp = new ArrayList<>();
 
-        for (int i = 0; i < lista.size(); i++) {
-            GeneradorPelicula g1 = new GeneradorPelicula();
-            g1.establecerLlave(lista.get(i));
-            g1.establecerUrl("http://api.movie?api=");
-            g1.establecerUser(listaAux.get(i).user);
-            gp.add(g1);
-        }
+        ArrayList<GeneradorPelicula> gp = lectura.obtenerListaGeneradores();;
+
         for (int i = 0; i < gp.size(); i++) {
             System.out.print(gp.get(i));
-
         }
-        
+
         lectura.cerrarArchivo();
 
     }
