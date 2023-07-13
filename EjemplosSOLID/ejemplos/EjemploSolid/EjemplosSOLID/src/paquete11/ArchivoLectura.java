@@ -67,7 +67,13 @@ public class ArchivoLectura {
                 ArrayList<String> linea_partes = new ArrayList<>(
                         Arrays.asList(linea.split(";"))); // 1 [usuario001] de netflix
 
-                for (int i = 0; i < linea_partes.size(); i++) {
+                establecerProceso(linea_partes);
+
+            } // fin de while
+        }
+    }
+    public void establecerProceso (ArrayList<String> linea_partes){
+        for (int i = 0; i < linea_partes.size(); i++) {
                     switch (linea_partes.get(i)) {
                         case "Netflix": {
                             APINetflix netflix = new APINetflix();
@@ -119,12 +125,6 @@ public class ArchivoLectura {
                             break;
                     }
                 }
-
-            } // fin de while
-        }
-    }
-    public void establecerProceso (){
-        
     }
 
     public ArrayList<APIMovie> obtenerLista() { // APIMovies
