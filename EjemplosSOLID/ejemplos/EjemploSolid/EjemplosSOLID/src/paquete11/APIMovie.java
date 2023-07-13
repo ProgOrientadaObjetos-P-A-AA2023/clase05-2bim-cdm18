@@ -15,10 +15,6 @@ public interface APIMovie {
     public String obtenerApiKey();
 
    
-    public static class APIDisneyMovie {
-    }
-    
-    public static class APIStartplus {
-    }
+   
     
 }
