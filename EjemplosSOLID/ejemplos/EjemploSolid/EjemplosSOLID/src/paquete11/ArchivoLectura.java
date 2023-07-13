@@ -123,6 +123,9 @@ public class ArchivoLectura {
             } // fin de while
         }
     }
+    public void establecerProceso (){
+        
+    }
 
     public ArrayList<APIMovie> obtenerLista() { // APIMovies
         return lista;
