@@ -38,6 +38,8 @@ public class Principal {
             System.out.print(gp.get(i));
 
         }
+        
+        lectura.cerrarArchivo();
 
     }
 }

@@ -4,28 +4,20 @@
  * and open the template in the editor.
  */
 package paquete11;
-
-/**
- *
- * @author reroes
- */
+ /**
+     *
+     * @author carlo
+     */
 public interface APIMovie {
     
     public void establecerApiKey(String ak);
     
     public String obtenerApiKey();
 
-    /**
-     *
-     * @author carlo
-     */
+   
     public static class APIDisneyMovie {
     }
-
-    /**
-     *
-     * @author carlo
-     */
+    
     public static class APIStartplus {
     }
     

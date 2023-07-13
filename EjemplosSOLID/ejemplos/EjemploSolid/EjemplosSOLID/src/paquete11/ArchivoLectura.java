@@ -3,7 +3,6 @@ package paquete11;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,7 +13,6 @@ public class ArchivoLectura {
     private String rutaArchivo;
     private ArrayList<APIMovie> lista;
     private ArrayList<Auxiliar> listaAux;
-
 
     public ArchivoLectura(String n) {
         nombreArchivo = n;
@@ -67,21 +65,21 @@ public class ArchivoLectura {
                 String linea = entrada.nextLine(); // 1;usuario001;Netflix
 
                 ArrayList<String> linea_partes = new ArrayList<>(
-                Arrays.asList(linea.split(";"))); // 1 [usuario001] de netflix
+                        Arrays.asList(linea.split(";"))); // 1 [usuario001] de netflix
 
                 for (int i = 0; i < linea_partes.size(); i++) {
                     switch (linea_partes.get(i)) {
                         case "Netflix": {
                             APINetflix netflix = new APINetflix();
-                            
+
                             String ak = String.format("%s/user?%s",
                                     linea_partes.get(2),
                                     linea_partes.get(1));
                             netflix.establecerApiKey(ak);
-                            
+
                             Auxiliar aux = new Auxiliar(linea_partes.get(1));
-                            listaAux.add(aux);
-                            lista.add(netflix);
+                            listaAux.add(aux); // user
+                            lista.add(netflix); // anadir el API
                             break;
                         }
                         case "Amazon": {
@@ -90,7 +88,7 @@ public class ArchivoLectura {
                                     linea_partes.get(2), linea_partes.get(1));
                             amazon.establecerApiKey(ak);
                             Auxiliar aux = new Auxiliar(linea_partes.get(1));
-                            listaAux.add(aux);
+                            listaAux.add(aux); // user
                             lista.add(amazon);
 
                             break;
@@ -102,7 +100,7 @@ public class ArchivoLectura {
                                     linea_partes.get(1));
                             disney.establecerApiKey(ak);
                             Auxiliar aux = new Auxiliar(linea_partes.get(1));
-                            listaAux.add(aux);
+                            listaAux.add(aux); // user
                             lista.add(disney);
                             break;
                         }
@@ -113,12 +111,11 @@ public class ArchivoLectura {
                                     linea_partes.get(1));
                             starplus.establecerApiKey(ak);
                             Auxiliar aux = new Auxiliar(linea_partes.get(1));
-                            listaAux.add(aux);
+                            listaAux.add(aux); // user
                             lista.add(starplus);
                             break;
                         }
                         default:
-                            
                             break;
                     }
                 }
@@ -127,11 +124,11 @@ public class ArchivoLectura {
         }
     }
 
-    public ArrayList<APIMovie> obtenerLista() {
+    public ArrayList<APIMovie> obtenerLista() { // APIMovies
         return lista;
     }
-    
-    public ArrayList<Auxiliar> obtenerListaAuxiliar() {
+
+    public ArrayList<Auxiliar> obtenerListaAuxiliar() { // usernames
         return listaAux;
     }
 

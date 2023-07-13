@@ -8,12 +8,14 @@ package paquete11;
  *
  * @author carlo
  */
-public class APIDisney implements APIMovie{
-     private String apiKey;
+public class APIDisney implements APIMovie {
+
+    private String apiKey;
 
     @Override
     public void establecerApiKey(String ak) {
         int random = (int) (Math.random() * 472132);
+        
         apiKey = ak + "DISNEY" + random;
     }
 
