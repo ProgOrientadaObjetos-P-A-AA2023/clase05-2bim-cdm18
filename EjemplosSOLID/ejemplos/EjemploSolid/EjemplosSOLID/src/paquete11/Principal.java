@@ -34,7 +34,6 @@ public class Principal {
             g1.establecerUser(listaAux.get(i).user);
             gp.add(g1);
         }
-
         for (int i = 0; i < gp.size(); i++) {
             System.out.print(gp.get(i));
 
